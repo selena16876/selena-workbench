@@ -201,40 +201,46 @@ toast('已删除');
 
 // ===== 跨境电商数据 =====
 const EC_NEWS = [
-{ tag: '行业动态', title: '亚马逊宣布2025年FBA费用调整', summary: '亚马逊对标准尺寸商品FBA配送费上调3-5%，同时推出新的入库绩效指标(IPI)要求，卖家需保持IPI分数500以上以避免仓储限制。', date: '2025-07-20' },
-{ tag: '选品趋势', title: '女鞋品类：厚底运动鞋持续热销', summary: 'Platform厚底老爹鞋、Cloud运动鞋继续领跑亚马逊女鞋BSR。舒适通勤鞋搜索量同比增长35%，运动休闲风仍是主旋律。', date: '2025-07-22' },
-{ tag: '平台政策', title: 'Walmart Marketplace开放更多第三方卖家', summary: 'Walmart持续扩大第三方卖家规模，对跨境卖家审核加快。新增WFS仓储服务支持小件商品，配送时效缩短至2天。', date: '2025-07-18' },
-{ tag: '营销策略', title: 'Target推出新一轮Circle Week促销', summary: 'Target Circle Week涵盖服饰鞋包品类，女鞋和手袋折扣力度达40-50%。第三方卖家可参与促销活动获取额外流量曝光。', date: '2025-07-21' },
-{ tag: '选品趋势', title: '包包品类：迷你包和托特包两极分化', summary: '迷你斜挎包在Z世代中持续流行，而大容量托特包在职场女性中需求稳定。皮质通勤包客单价$40-80区间竞争较小。', date: '2025-07-23' }
+{ tag: '行业动态', title: '亚马逊7月FBA费用调整与广告计费变更', summary: 'Amazon 7月新增低客单价商品$0.38附加费,收紧补货限额,Rufus AI影响listing优化策略。建议卖家关注IPI分数,优化广告结构应对新计费。', date: '2026-07-07', source: 'news.seonib.com' },
+{ tag: '市场数据', title: '2026上半年中国跨境电商用户达1.4亿', summary: '2026上半年中国跨境电商平台购物人数达1.4亿,出口额持续增长。女鞋女包等时尚品类仍是跨境热门赛道。', date: '2026-07-22', source: '新华网' },
+{ tag: '平台政策', title: 'Walmart Marketplace 2026新卖家激励计划', summary: 'Walmart推出New Seller Savings Program、Pricing Insights工具,优化WFS履约,降低费用吸引Amazon卖家入驻。女鞋品类WFS入仓优先曝光。', date: '2026-07-07', source: 'mapmychannel.com' },
+{ tag: '大促预告', title: 'Target Circle Deal Days 2026夏季大促', summary: 'Target Circle会员享返校及夏季商品最高45%折扣,女鞋女包品类参与力度大。第三方卖家需提前2周提报,建议备货通勤鞋和托特包。', date: '2026-07-01', source: 'corporate.target.com' },
+{ tag: '政策法规', title: '7月外贸新规:关税与跨境电商税务调整', summary: '涵盖投资规则、海关申报标准、关税政策、产品合规及跨境电商税务新规。卖家需关注低值商品免税阈值变化。', date: '2026-07-01', source: 'inspector.ltd' }
 ];
 
 const PRODUCTS = [
-{ platform: 'amazon', cat: 'shoes', name: 'Steve Madden 厚底运动鞋', price: '$89.95', emoji: '👟', tags: ['热销','厚底','通勤'] },
-{ platform: 'amazon', cat: 'shoes', name: 'Cloud Monster 缓冲跑鞋', price: '$169.99', emoji: '👟', tags: ['新品','运动','舒适'] },
-{ platform: 'amazon', cat: 'shoes', name: 'Dr. Scholls 舒适平底鞋', price: '$49.99', emoji: '👠', tags: ['通勤','舒适'] },
-{ platform: 'amazon', cat: 'bags', name: 'MK Jet Set 托特包', price: '$128.00', emoji: '👜', tags: ['经典','职场'] },
-{ platform: 'amazon', cat: 'bags', name: 'Coach Tabby 迷你包', price: '$195.00', emoji: '👜', tags: ['热销','迷你'] },
-{ platform: 'amazon', cat: 'bags', name: '斜挎尼龙腰包', price: '$22.99', emoji: '🎒', tags: ['低价','休闲'] },
-{ platform: 'target', cat: 'shoes', name: 'Madison 系带乐福鞋', price: '$39.99', emoji: '👞', tags: ['新品','复古'] },
-{ platform: 'target', cat: 'shoes', name: 'Cloudslide 凉拖', price: '$25.00', emoji: '👡', tags: ['夏季','舒适'] },
-{ platform: 'target', cat: 'bags', name: 'Leather Crossbody 斜挎包', price: '$44.99', emoji: '👜', tags: ['简约'] },
-{ platform: 'target', cat: 'bags', name: 'Canvas Tote 帆布托特', price: '$19.99', emoji: '👜', tags: ['低价','日常'] },
-{ platform: 'walmart', cat: 'shoes', name: 'Athletic Running Sneakers', price: '$29.97', emoji: '👟', tags: ['低价','运动'] },
-{ platform: 'walmart', cat: 'shoes', name: 'Slip On Casual Flats', price: '$19.88', emoji: '👞', tags: ['低价','休闲'] },
-{ platform: 'walmart', cat: 'bags', name: 'Faux Leather Satchel', price: '$24.88', emoji: '👜', tags: ['低价','通勤'] },
-{ platform: 'walmart', cat: 'bags', name: 'Mini Backpack 小背包', price: '$17.97', emoji: '🎒', tags: ['低价','休闲'] },
-{ platform: 'kohls', cat: 'shoes', name: 'Nike Tanjun 运动鞋', price: '$54.99', emoji: '👟', tags: ['品牌','经典'] },
-{ platform: 'kohls', cat: 'shoes', name: 'Crocs 经典洞洞鞋', price: '$44.99', emoji: '👡', tags: ['夏季','舒适'] },
-{ platform: 'kohls', cat: 'bags', name: 'Vera Bradley 花纹包', price: '$59.99', emoji: '👜', tags: ['品牌','花纹'] },
-{ platform: 'kohls', cat: 'bags', name: 'Sonoma 皮革手提包', price: '$39.99', emoji: '👜', tags: ['简约'] }
+// 女鞋 - Amazon
+{ platform: 'amazon', cat: 'shoes', name: 'NORTIV 8 女士健步鞋 运动网球鞋', price: '$32.99', img: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0DCBT5T37', tags: ['热销','运动','透气'] },
+{ platform: 'amazon', cat: 'shoes', name: 'Brooks Ghost Max 3 女士缓冲跑鞋', price: '$149.95', img: 'https://images.unsplash.com/photo-1622760806364-5ccac8096b59?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0DM3W9RMW', tags: ['新品','专业','缓震'] },
+{ platform: 'amazon', cat: 'shoes', name: 'New Balance 608 V5 女士休闲训练鞋', price: '$74.99', img: 'https://images.unsplash.com/photo-1689357642277-65228ee23680?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B07B422G13', tags: ['经典','通勤','舒适'] },
+{ platform: 'amazon', cat: 'shoes', name: 'CUSHIONAIRE Siesta 芭蕾平底鞋', price: '$39.99', img: 'https://images.unsplash.com/photo-1596565206601-eb1c83627d49?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0H2FT3P28', tags: ['通勤','优雅'] },
+// 女鞋 - Target
+{ platform: 'target', cat: 'shoes', name: 'CUSHIONAIRE Fable Cloud 恢复拖鞋', price: '$24.99', img: 'https://images.unsplash.com/photo-1739138053555-13321c306033?w=400&h=300&fit=crop&q=80', url: 'https://www.target.com/p/cushionaire-women-s-fable-cloud-recovery-clog-with-comfort/-/A-1000639729', tags: ['夏季','舒适'] },
+{ platform: 'target', cat: 'shoes', name: 'CUSHIONAIRE Belinda 蕾丝休闲鞋', price: '$29.99', img: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&h=300&fit=crop&q=80', url: 'https://www.target.com/p/cushionaire-belinda-women-s-lace-detail-casual-sneakers-elegant-ribbon-lace-up-shoes-with-memory-foam/-/A-1002405606', tags: ['新品','记忆棉'] },
+// 女包 - Amazon
+{ platform: 'amazon', cat: 'bags', name: 'BAGSMART 轻量羽绒服托特包', price: '$26.99', img: 'https://images.unsplash.com/photo-1705909237050-7a7625b47fac?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0CS2X23RY', tags: ['热销','轻量','大容量'] },
+{ platform: 'amazon', cat: 'bags', name: 'KKXIU 复古 Hobo 斜挎包', price: '$32.99', img: 'https://images.unsplash.com/photo-1605733513597-a8f8341084e6?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0DKMQ7958', tags: ['复古','通勤'] },
+{ platform: 'amazon', cat: 'bags', name: 'Realer 仿皮 Hobo 斜挎包', price: '$35.99', img: 'https://images.unsplash.com/photo-1681747685985-a401c271156c?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0756VCN94', tags: ['仿皮','简约'] },
+{ platform: 'amazon', cat: 'bags', name: 'LOVEVOOK 三仓防水 Hobo 包', price: '$29.99', img: 'https://images.unsplash.com/photo-1628149455678-16f37bc392f4?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0FMKC9ML4', tags: ['防水','大容量'] },
+// 女包 - Target
+{ platform: 'target', cat: 'bags', name: 'A New Day 慵懒风手提包', price: '$24.99', img: 'https://images.unsplash.com/photo-1640901555383-7335ec5a6476?w=400&h=300&fit=crop&q=80', url: 'https://www.target.com/p/slouchy-satchel-handbag-a-new-day-8482-black/-/A-94780329', tags: ['日常','简约'] },
+{ platform: 'target', cat: 'bags', name: 'Wild Fable 羽绒 Hobo 包', price: '$19.99', img: 'https://images.unsplash.com/photo-1605733513597-a8f8341084e6?w=400&h=300&fit=crop&q=80', url: 'https://www.target.com/p/puffer-hobo-bag-wild-fable-8482-brown/-/A-94409056', tags: ['潮流','低价'] },
+// 背包 - Amazon
+{ platform: 'amazon', cat: 'backpack', name: 'BAGSMART 学院风笔记本背包', price: '$29.99', img: 'https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0DQSJM8SX', tags: ['热销','商务','15.6寸'] },
+{ platform: 'amazon', cat: 'backpack', name: 'Taygeer TSA随身旅行背包', price: '$35.99', img: 'https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B09MQWWP87', tags: ['旅行','TSA'] },
+{ platform: 'amazon', cat: 'backpack', name: '真皮旅行背包手提包', price: '$45.99', img: 'https://images.unsplash.com/photo-1527631615371-98cbbff5125a?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0H26DN7MP', tags: ['真皮','高端'] },
+// 凉鞋 - Amazon
+{ platform: 'amazon', cat: 'sandals', name: 'KuaiLu 拱支撑人字拖', price: '$18.99', img: 'https://images.unsplash.com/photo-1662132090867-57a37fa1edf8?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0C5ZRQS2X', tags: ['夏季','拱支撑'] },
+{ platform: 'amazon', cat: 'sandals', name: 'Project Cloud 记忆棉平底拖', price: '$24.99', img: 'https://images.unsplash.com/photo-1638859436319-662beea3bfa8?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0D2F5845T', tags: ['记忆棉','舒适'] },
+{ platform: 'amazon', cat: 'sandals', name: 'Project Cloud 真皮软木凉拖', price: '$39.99', img: 'https://images.unsplash.com/photo-1559766084-38c917374a9a?w=400&h=300&fit=crop&q=80', url: 'https://www.amazon.com/dp/B0CNYDBPDD', tags: ['真皮','软木'] }
 ];
 
 const PROMOS = [
-{ platform: 'Amazon', title: 'Prime Day 秋季返场', detail: '预计9月下旬。会员专享折扣，女鞋品类历史折扣30-60%。建议提前备货、设置Coupon、优化Listing。', deadline: '预计 2025年9月' },
-{ platform: 'Target', title: 'Circle Week 服饰促销', detail: 'Target Circle会员享受额外40-50% off鞋包。第三方卖家可提报参与，需提前2周申请。', deadline: '本月底截止' },
-{ platform: 'Walmart', title: 'Walmart+ 会员日', detail: 'Walmart+会员专属折扣，运动鞋和休闲包有大额减免。WFS入仓商品优先曝光。', deadline: '每月第一个周五' },
-{ platform: 'Kohls', title: 'Kohl\'s Cash 返现活动', detail: '每消费$50返$10 Kohl\'s Cash，可叠加折扣码。女鞋品类参与力度大。', deadline: '本周末截止' },
-{ platform: '通用', title: 'Q4 备货截止提醒', detail: '亚马逊FBA Q4入库截止日通常在10月中旬。如需参加黑五网一，女鞋女包需9月前完成备货发往FBA。', deadline: '2025年10月中旬' }
+{ platform: 'Amazon', title: 'Prime Day 2026 秋季返场', detail: '预计9月下旬。会员专享折扣,女鞋品类历史折扣30-60%。建议提前备货、设置Coupon、优化Listing。', deadline: '预计 2026年9月' },
+{ platform: 'Target', title: 'Circle Deal Days 夏季大促', detail: 'Target Circle会员享额外最高45% off鞋包。第三方卖家需提前2周提报,女鞋女包品类参与力度大。', deadline: '本月底截止' },
+{ platform: 'Walmart', title: 'Walmart+ 会员日 + 新卖家激励', detail: 'Walmart+会员专属折扣,运动鞋和休闲包有大额减免。New Seller Savings Program降低入驻门槛,WFS入仓优先曝光。', deadline: '每月第一个周五' },
+{ platform: 'Kohls', title: 'Kohl\'s Cash 返现活动', detail: '每消费$50返$10 Kohl\'s Cash,可叠加折扣码。女鞋品类参与力度大,品牌运动鞋折扣明显。', deadline: '本周末截止' },
+{ platform: '通用', title: 'Q4 备货截止提醒', detail: '亚马逊FBA Q4入库截止日通常在10月中旬。如需参加黑五网一,女鞋女包需9月前完成备货发往FBA。', deadline: '2026年10月中旬' }
 ];
 
 function initEcommerce() {
@@ -254,7 +260,7 @@ document.getElementById('newsList').innerHTML = EC_NEWS.map(n => `
 <span class="news-tag">${n.tag}</span>
 <div class="news-title">${n.title}</div>
 <div class="news-summary">${n.summary}</div>
-<div class="news-date">📅 ${n.date}</div>
+<div class="news-date">📅 ${n.date} · ${n.source}</div>
 </div>
 `).join('');
 
@@ -297,14 +303,149 @@ const filtered = PRODUCTS.filter(p =>
 const platformNames = { amazon:'亚马逊', target:'Target', walmart:'Walmart', kohls:'Kohls' };
 const platformColors = { amazon:'#FF9900', target:'#CC0000', walmart:'#0071CE', kohls:'#CC0000' };
 document.getElementById('productList').innerHTML = filtered.map(p => `
-<div class="product-card">
-<div class="product-img">${p.emoji}</div>
+<a class="product-card" href="${p.url}" target="_blank" rel="noopener">
+<div class="product-img" style="background-image:url('${p.img}')"></div>
 <div class="product-info">
 <span class="product-platform" style="background:${platformColors[p.platform]}">${platformNames[p.platform]}</span>
 <div class="product-name">${p.name}</div>
 <div class="product-price">${p.price}</div>
 <div class="product-tags">${p.tags.map(t => `<span class="product-tag">${t}</span>`).join('')}</div>
+<div class="product-link">查看商品 →</div>
 </div>
+</a>
+`).join('');
+}
+
+// ===== 财经模块 =====
+const FINANCE_NEWS = [
+{ tag: 'A股', title: '上证指数周收3814点,科技抱团瓦解后触底反弹', summary: '科技抱团瓦解+缩量调整,证监会释放维稳信号。7月21日单日沪指涨1.79%,创业板涨7.05%。两市成交额1.93万亿。', date: '2026-07-24', source: '东方财富' },
+{ tag: 'AI', title: '中国万亿级开源大模型震惊华尔街', summary: '央视报道中国AI开源大模型引发国际关注,相关概念股走强,算力、芯片板块获资金追捧。', date: '2026-07-24', source: 'CCTV天下财经' },
+{ tag: '税务', title: '离岸税收新规:7月24日起90天内纳税人需应对已设立离岸架构', summary: '财新报道税务合规新要求,涉及离岸架构的企业和个人需在90天内完成自查和申报。', date: '2026-07-24', source: '财新网' },
+{ tag: '黄金', title: '黄金股ETF全周涨超10%,国际金价突破历史新高', summary: '美联储降息预期升温推动贵金属板块走强,黄金避险需求增加,Au9999报880元/克。', date: '2026-07-24', source: '东方财富' },
+{ tag: '宏观', title: '上半年消费品以旧换新政策带动销售增长', summary: '新华社时评指出中国是世界经济扩容提质重要引擎,以旧换新政策持续释放消费潜力。', date: '2026-07-22', source: '新华网' }
+];
+
+const FUND_NEWS = [
+{ tag: 'IPO', title: '长鑫科技科创板IPO创纪录,5507只公募产品参与打新', summary: '国产DRAM龙头募资666亿,获配108亿元,易方达/华夏/工银瑞信位列前三。打新热情高涨。', date: '2026-07-22', source: '私募排排网' },
+{ tag: '季报', title: '主动权益基金二季度创造利润超万亿元', summary: '10家头部公司占比近五成,公募基金整体表现强劲,权益类产品回暖明显。', date: '2026-07-24', source: '天天基金网' },
+{ tag: '调仓', title: '公募港股配置由超配转低配,AI硬件成唯一加仓主线', summary: '二季度基金调仓方向显示,资金从港股转向A股AI硬件板块,算力产业链获持续加仓。', date: '2026-07-24', source: '东方财富基金' },
+{ tag: 'ETF', title: '666亿资金借道ETF布局震荡市,沪深300迎百亿回马枪', summary: '资金借道ETF抄底,沪深300周一迎百亿资金流入,被动指数投资成震荡市首选。', date: '2026-07-14', source: '中新经纬' },
+{ tag: '估值', title: '华宝证券:上证指数市盈率约16.5倍,A股估值不贵', summary: '2026年以来A股已实施现金分红力度加大,坚定市场信心,当前估值具备配置价值。', date: '2026-07-23', source: '同花顺' }
+];
+
+function initFinance() {
+// Tab切换
+document.querySelectorAll('#financeTabs .tab-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+document.querySelectorAll('#financeTabs .tab-btn').forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+document.querySelectorAll('#financeView .tab-content').forEach(c => c.classList.remove('active'));
+document.getElementById('ftab-' + btn.dataset.ftab).classList.add('active');
+});
+});
+// 财经新闻
+document.getElementById('financeNewsList').innerHTML = FINANCE_NEWS.map(n => `
+<div class="news-item">
+<span class="news-tag">${n.tag}</span>
+<div class="news-title">${n.title}</div>
+<div class="news-summary">${n.summary}</div>
+<div class="news-date">📅 ${n.date} · ${n.source}</div>
+</div>
+`).join('');
+// 基金资讯
+document.getElementById('fundNewsList').innerHTML = FUND_NEWS.map(n => `
+<div class="news-item">
+<span class="news-tag">${n.tag}</span>
+<div class="news-title">${n.title}</div>
+<div class="news-summary">${n.summary}</div>
+<div class="news-date">📅 ${n.date} · ${n.source}</div>
+</div>
+`).join('');
+}
+
+// ===== 小红书模块 =====
+const XHS_NOTES = [
+{ cat: 'beauty', catName: '美妆', emoji: '💄', title: '烂脸救星!用了28天,我的痘印淡了70%', content: 'SCQA模型:情境(皮肤差)→冲突(试了10款没用)→问题→答案(推荐成分)。开头制造悬念,中间给出具体数字,结尾推荐产品+互动引导。', likes: '2.3w', saves: '1.8w' },
+{ cat: 'fashion', catName: '穿搭', emoji: '👔', title: '微胖女生必学!1件衬衫3种穿法,显瘦又高级', content: '教程步骤型:工具准备→分步教学→注意事项,附细节图。痛点+数字+教程结构,实操性强,收藏率高。', likes: '1.5w', saves: '2.1w' },
+{ cat: 'beauty', catName: '美妆', emoji: '💄', title: '油痘肌必看!5款平价粉底液实测,持妆8小时不氧化【无广】', content: '干货清单型:5个产品逐一点评,数字增强记忆点。【无广】标签提升信任度,适合测评类内容。', likes: '3.1w', saves: '2.8w' },
+{ cat: 'ec', catName: '跨境电商', emoji: '📦', title: '同样是做副业,为什么别人能月入过万?原来秘诀在这', content: '观点输出+案例支撑,打破认知误区。好奇引导型标题,适合知识付费和副业类内容,评论区互动率高。', likes: '8923', saves: '1.2w' },
+{ cat: 'fashion', catName: '穿搭', emoji: '👔', title: '被问了800遍的通勤穿搭公式,今天一次性说清楚', content: '合集盘点型:10+套搭配方案+推荐优先级。好奇+互动引导,适合垂直领域博主建立专业形象。', likes: '2.7w', saves: '3.5w' },
+{ cat: 'life', catName: '生活', emoji: '🏠', title: '租房党必看!10件平价家居好物,月薪3k也能装出温馨小窝', content: '场景种草型:场景代入→好物展示→使用感受→推荐理由。人群+痛点+合集,转化率高。', likes: '1.8w', saves: '4.2w' }
+];
+
+const XHS_STRATEGY = [
+{ section: '账号定位', title: '找到你的差异化人设', points: [
+'定位公式:核心赛道+目标人群+独特价值(例:"黄皮美妆师|平价口红测评")',
+'聚焦垂直细分:不做"美妆"做"学生党平价护肤",不做"穿搭"做"小个子通勤穿搭"',
+'人设打造:不做"杂货铺"博主,卖宠物用品可定位"养猫5年的成分党"',
+'风格统一:干货输出型/日常分享型/测评对比型,保持一致形成记忆点'
+]},
+{ section: '爆款内容', title: '选题与标题的爆款公式', points: [
+'选题公式:痛点/场景+品类+解决方案,用搜索框下拉词找蓝海词',
+'标题结构:"悬念+数字+身份",如"烂脸救星!用了28天痘印淡了70%"',
+'封面趋势:2026年流行"信息型封面",图上大字标出核心卖点/对比结果',
+'正文模型:SCQA(情境-冲突-问题-答案),自然植入2-3个搜索关键词',
+'发布时间:职场人早8/晚8,宝妈午12/晚9,据粉丝活跃时段匹配'
+]},
+{ section: '流量增长', title: '顺应算法获取精准流量', points: [
+'算法机制:2026年从"互动率"向"点击-互动-搜索-转化"全链路倾斜,搜索权重提升',
+'内容矩阵:引流款30%(免费干货/合集)+信任款50%(测评/翻车实录)+转化款20%',
+'长尾流量:垂直细分类目获更精准流量,优质笔记可获3-6个月搜索流量',
+'日更节奏:起号期3-5篇/天测选题,增长期5-8篇找爆款模型,稳定期3-5篇持续优化',
+'中长视频红利:2分钟以上视频完播超30秒可进更大流量池'
+]},
+{ section: '副业变现', title: '从涨粉到赚钱的路径', points: [
+'商单广告:1000粉即可开通蒲公英接单,单条200-2000元,垂直赛道报价更高',
+'电商带货:0粉即可开店,前100万交易额免佣金,仅扣0.6%支付渠道费',
+'直播带货:每周1-2场"答疑式"直播,信任度远高于叫卖式',
+'私域引流:通过"领取攻略/资料包"引导私信,用群聊或薯店作中转站(平台管控趋严)',
+'知识付费:输出课程/训练营变现专业技能,适合垂直领域达人'
+]}
+];
+
+function initXiaohongshu() {
+// Tab切换
+document.querySelectorAll('#xhsTabs .tab-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+document.querySelectorAll('#xhsTabs .tab-btn').forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+document.querySelectorAll('#xiaohongshuView .tab-content').forEach(c => c.classList.remove('active'));
+document.getElementById('xtab-' + btn.dataset.xtab).classList.add('active');
+});
+});
+// 文案库
+let curXhsCat = 'all';
+function renderXhsNotes(cat) {
+const filtered = cat === 'all' ? XHS_NOTES : XHS_NOTES.filter(n => n.cat === cat);
+document.getElementById('xhsNotesList').innerHTML = filtered.length ? filtered.map(n => `
+<div class="xhs-note-card">
+<div class="xhs-note-cover">${n.emoji}</div>
+<div class="xhs-note-body">
+<span class="xhs-note-cat">${n.catName}</span>
+<div class="xhs-note-title">${n.title}</div>
+<div class="xhs-note-content">${n.content}</div>
+<div class="xhs-note-stats">❤️ ${n.likes} · 🔖 ${n.saves}</div>
+</div>
+</div>
+`).join('') : '<div class="empty">暂无该分类文案</div>';
+}
+document.querySelectorAll('.xhs-filter .filter-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+document.querySelectorAll('.xhs-filter .filter-btn').forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+curXhsCat = btn.dataset.xcat;
+renderXhsNotes(curXhsCat);
+});
+});
+renderXhsNotes('all');
+// 运营策略
+document.getElementById('xhsStrategyList').innerHTML = XHS_STRATEGY.map(s => `
+<div class="xhs-strategy-card">
+<div class="xhs-strategy-section">${s.section}</div>
+<div class="xhs-strategy-title">${s.title}</div>
+<ul class="xhs-strategy-points">
+${s.points.map(p => `<li>${p}</li>`).join('')}
+</ul>
 </div>
 `).join('');
 }
@@ -895,6 +1036,8 @@ initTodo();
 initEnglish();
 initFitness();
 initReading();
+initFinance();
+initXiaohongshu();
 initSpeechRecognition();
 bindEvents();
 registerSW();

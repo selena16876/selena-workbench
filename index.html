@@ -31,7 +31,7 @@
 <!-- 首页仪表盘 -->
 <main id="homeView" class="view active">
 <div class="dashboard-grid">
-<div class="dash-card finance" data-nav="accounting">
+<div class="dash-card accounting" data-nav="accounting">
 <div class="dash-icon">💰</div>
 <div class="dash-info">
 <div class="dash-label">今日支出</div>
@@ -78,6 +78,22 @@
 <div class="dash-label">阅读</div>
 <div class="dash-value" id="readingProgress">0%</div>
 <div class="dash-sub" id="readingBook">点击选书</div>
+</div>
+</div>
+<div class="dash-card finance" data-nav="finance">
+<div class="dash-icon">💰</div>
+<div class="dash-info">
+<div class="dash-label">财经</div>
+<div class="dash-value" id="financeSummary">上证 3814</div>
+<div class="dash-sub">点击查看最新资讯</div>
+</div>
+</div>
+<div class="dash-card xiaohongshu" data-nav="xiaohongshu">
+<div class="dash-icon">📕</div>
+<div class="dash-info">
+<div class="dash-label">小红书</div>
+<div class="dash-value">副业灵感</div>
+<div class="dash-sub">爆款文案 + 运营策略</div>
 </div>
 </div>
 </div>
@@ -189,13 +205,13 @@
 <button class="filter-btn active" data-platform="all">全部</button>
 <button class="filter-btn" data-platform="amazon">亚马逊</button>
 <button class="filter-btn" data-platform="target">Target</button>
-<button class="filter-btn" data-platform="walmart">Walmart</button>
-<button class="filter-btn" data-platform="kohls">Kohls</button>
 </div>
 <div class="product-filter">
 <button class="filter-btn active" data-category="all">全部</button>
 <button class="filter-btn" data-category="shoes">女鞋</button>
-<button class="filter-btn" data-category="bags">包包</button>
+<button class="filter-btn" data-category="bags">女包</button>
+<button class="filter-btn" data-category="backpack">背包</button>
+<button class="filter-btn" data-category="sandals">凉鞋</button>
 </div>
 <div id="productList" class="product-list"></div>
 </div>
@@ -439,6 +455,77 @@
 <div id="bookList" class="book-list"></div>
 </section>
 
+<!-- ====== 财经模块 ====== -->
+<section id="financeView" class="view">
+<div class="view-header">
+<button class="back-btn" data-nav="home">← 返回</button>
+<h2>💰 财经资讯</h2>
+</div>
+
+<!-- 市场速览 -->
+<div class="finance-summary" id="financeSummaryCard">
+<div class="summary-item">
+<div class="summary-label">上证指数</div>
+<div class="summary-value" id="shanghaiValue">3814.20</div>
+<div class="summary-change up">+1.33% / 周</div>
+</div>
+<div class="summary-item">
+<div class="summary-label">美元/人民币</div>
+<div class="summary-value" id="usdCnyValue">6.7933</div>
+<div class="summary-change">中间价</div>
+</div>
+<div class="summary-item">
+<div class="summary-label">黄金Au9999</div>
+<div class="summary-value" id="goldValue">880</div>
+<div class="summary-change down">-1.75% / 日</div>
+</div>
+</div>
+
+<!-- Tab栏 -->
+<div class="tab-bar" id="financeTabs">
+<button class="tab-btn active" data-ftab="news">📰 财经新闻</button>
+<button class="tab-btn" data-ftab="fund">📊 基金资讯</button>
+</div>
+
+<div class="tab-content active" id="ftab-news">
+<div id="financeNewsList" class="news-list"></div>
+</div>
+<div class="tab-content" id="ftab-fund">
+<div id="fundNewsList" class="news-list"></div>
+</div>
+
+<div class="finance-note">📅 数据更新于 2026-07-24 · 非实时,定期更新</div>
+</section>
+
+<!-- ====== 小红书模块 ====== -->
+<section id="xiaohongshuView" class="view">
+<div class="view-header">
+<button class="back-btn" data-nav="home">← 返回</button>
+<h2>📕 小红书</h2>
+</div>
+
+<!-- Tab栏 -->
+<div class="tab-bar" id="xhsTabs">
+<button class="tab-btn active" data-xtab="notes">✨ 爆款文案库</button>
+<button class="tab-btn" data-xtab="strategy">🎯 运营策略</button>
+</div>
+
+<div class="tab-content active" id="xtab-notes">
+<div class="xhs-filter">
+<button class="filter-btn active" data-xcat="all">全部</button>
+<button class="filter-btn" data-xcat="beauty">美妆</button>
+<button class="filter-btn" data-xcat="fashion">穿搭</button>
+<button class="filter-btn" data-xcat="life">生活</button>
+<button class="filter-btn" data-xcat="ec">跨境电商</button>
+</div>
+<div id="xhsNotesList" class="xhs-notes-list"></div>
+</div>
+
+<div class="tab-content" id="xtab-strategy">
+<div id="xhsStrategyList" class="xhs-strategy-list"></div>
+</div>
+</section>
+
 <!-- ====== 阅读器 ====== -->
 <section id="readerView" class="view">
 <div class="view-header">
@@ -523,6 +610,14 @@
 <button class="side-nav-btn" data-nav="reading">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
 <span>阅读</span>
+</button>
+<button class="side-nav-btn" data-nav="finance">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+<span>财经</span>
+</button>
+<button class="side-nav-btn" data-nav="xiaohongshu">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<span>小红书</span>
 </button>
 </nav>
 </aside>
