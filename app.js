@@ -37,7 +37,7 @@ if (view === 'english') loadEnglishSentence();
 if (view === 'fitness') loadFitness();
 if (view === 'reading') renderBooks();
 // 关闭侧边栏(如果在打开状态)
-closeSidebar();
+if (typeof closeSidebar === 'function') closeSidebar();
 }
 
 // ===== 日期/时间 =====
