@@ -37,7 +37,7 @@ if (view === 'english') loadEnglishSentence();
 if (view === 'fitness') loadFitness();
 if (view === 'reading') renderBooks();
 // 关闭侧边栏(如果在打开状态)
-if (typeof closeSidebar === 'function') closeSidebar();
+closeSidebar();
 }
 
 // ===== 日期/时间 =====
@@ -982,6 +982,18 @@ navigate('reader');
 }
 }
 
+// 侧边栏开关(全局函数,navigate也可安全调用)
+function openSidebar(){
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+if(sidebar){sidebar.classList.add('open'); overlay.classList.add('show');}
+}
+function closeSidebar(){
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+if(sidebar){sidebar.classList.remove('open'); overlay.classList.remove('show');}
+}
+
 // ===== 事件绑定 =====
 function bindEvents() {
 // 所有 data-nav 元素
@@ -1008,8 +1020,6 @@ btn.addEventListener('click', () => navigate(btn.dataset.nav));
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('sidebarOverlay');
 const toggle = document.getElementById('menuToggle');
-function openSidebar(){ if(sidebar){sidebar.classList.add('open'); overlay.classList.add('show');} }
-function closeSidebar(){ if(sidebar){sidebar.classList.remove('open'); overlay.classList.remove('show');} }
 if(toggle) toggle.addEventListener('click', () => {
 if(sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
 });

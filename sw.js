@@ -1,5 +1,5 @@
 // Selena 工作台 Service Worker
-const CACHE_NAME = 'selena-dashboard-v3';
+const CACHE_NAME = 'selena-dashboard-v4';
 const ASSETS = [
 './',
 './index.html',
