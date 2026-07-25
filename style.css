@@ -4,7 +4,11 @@
 --primary:#6C5CE7;
 --primary-dark:#5A4BD1;
 --primary-light:#A29BFE;
---bg:#F8F7FC;
+--accent-pink:#FF6B9D;
+--accent-peach:#FFB088;
+--accent-mint:#7BEDF2;
+--bg:#F5F3FF;
+--bg-grad:linear-gradient(160deg,#F5F3FF 0%,#FFF0F6 50%,#FFF7ED 100%);
 --card:#FFFFFF;
 --text:#2D3436;
 --text-light:#636E72;
@@ -18,12 +22,15 @@
 --gradient4:linear-gradient(135deg,#FDCB6E,#FFEAA7);
 --gradient5:linear-gradient(135deg,#74b9ff,#a29bfe);
 --gradient6:linear-gradient(135deg,#e17055,#fab1a0);
+--gradient-hero:linear-gradient(135deg,#6C5CE7 0%,#A29BFE 40%,#FF6B9D 80%,#FFB088 100%);
+--gradient-btn:linear-gradient(135deg,#6C5CE7,#FF6B9D);
 --safe-top:env(safe-area-inset-top,0px);
 --safe-bottom:env(safe-area-inset-bottom,0px);
 }
 html,body{
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-background:var(--bg);
+background:var(--bg-grad);
+background-attachment:fixed;
 color:var(--text);
 font-size:15px;
 line-height:1.5;
@@ -34,13 +41,21 @@ body{padding-top:var(--safe-top);padding-bottom:var(--safe-bottom)}
 
 /* ===== 顶部 ===== */
 .app-header{
-background:var(--gradient1);
+background:var(--gradient-hero);
+background-size:200% 200%;
+animation:gradientShift 12s ease infinite;
 color:#fff;
 padding:16px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 position:sticky;top:0;z-index:100;
+box-shadow:0 4px 20px rgba(108,92,231,0.25);
+}
+@keyframes gradientShift{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 .header-greeting{display:flex;align-items:center;gap:12px}
 .header-avatar{
@@ -85,7 +100,9 @@ overflow-y:auto;
 .sidebar.open{transform:translateX(0)}
 .sidebar-header{
 padding:24px 20px 20px;
-background:var(--gradient1);
+background:var(--gradient-hero);
+background-size:200% 200%;
+animation:gradientShift 12s ease infinite;
 color:#fff;
 display:flex;align-items:center;gap:14px;
 margin:-1px 0 8px;
@@ -150,11 +167,11 @@ background:var(--card);
 border-radius:16px;
 padding:16px;
 display:flex;align-items:center;gap:12px;
-box-shadow:0 2px 12px rgba(0,0,0,0.06);
-cursor:pointer;transition:transform 0.2s;
+box-shadow:0 2px 12px rgba(108,92,231,0.08);
+cursor:pointer;transition:transform 0.2s,box-shadow 0.25s;
 position:relative;overflow:hidden;
 }
-.dash-card:active{transform:scale(0.97)}
+.dash-card:active{transform:scale(0.97);box-shadow:0 4px 20px rgba(108,92,231,0.25)}
 .dash-card::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%}
 .dash-card.accounting::before{background:linear-gradient(180deg,#6C5CE7,#A29BFE)}
 .dash-card.ecommerce::before{background:linear-gradient(180deg,#FF6B9D,#e17055)}
@@ -215,7 +232,11 @@ border-bottom:1px solid var(--border);
 .view-header h2{font-size:18px;font-weight:700;flex:1}
 .back-btn{
 background:none;border:none;
-color:var(--primary);font-size:15px;
+background:linear-gradient(135deg,#6C5CE7,#FF6B9D);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+font-size:15px;
 cursor:pointer;padding:4px 8px;
 font-weight:500;
 }
@@ -223,16 +244,17 @@ font-weight:500;
 /* ===== 通用按钮 ===== */
 .primary-btn{
 width:100%;
-background:var(--gradient1);
+background:var(--gradient-btn);
+background-size:150% 150%;
 color:#fff;border:none;
 border-radius:12px;
+box-shadow:0 4px 14px rgba(108,92,231,0.3);
+transition:transform 0.15s,box-shadow 0.25s;
 padding:14px;
 font-size:15px;font-weight:600;
 cursor:pointer;
-transition:transform 0.15s;
-box-shadow:0 4px 12px rgba(108,92,231,0.3);
 }
-.primary-btn:active{transform:scale(0.98)}
+.primary-btn:active{transform:scale(0.98);box-shadow:0 2px 8px rgba(108,92,231,0.4)}
 .primary-btn.outline{
 background:transparent;
 color:var(--primary);
@@ -329,7 +351,7 @@ cursor:pointer;
 border-radius:8px;
 transition:all 0.2s;
 }
-.tab-btn.active{background:var(--primary);color:#fff;font-weight:600}
+.tab-btn.active{background:var(--gradient-btn);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(108,92,231,0.3)}
 .tab-content{display:none}
 .tab-content.active{display:block;animation:fadeIn 0.3s}
 
@@ -358,7 +380,7 @@ color:var(--text-light);
 cursor:pointer;
 transition:all 0.15s;
 }
-.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.filter-btn.active{background:var(--gradient-btn);color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(108,92,231,0.25)}
 
 .product-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .product-card{
