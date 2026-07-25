@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Selena工作台">
+<meta name="theme-color" content="#6C5CE7">
+<title>Selena 工作台</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+<!-- 顶部 -->
+<header class="app-header">
+<div class="header-greeting">
+<div class="header-avatar">S</div>
+<div>
+<div class="header-hello">Hi, Selena ✨</div>
+<div class="header-date" id="todayDate"></div>
+</div>
+</div>
+<div class="header-weather" id="weatherInfo"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></div>
+</header>
+
+<!-- 首页仪表盘 -->
+<main id="homeView" class="view active">
+<div class="dashboard-grid">
+<div class="dash-card finance" data-nav="accounting">
+<div class="dash-icon">💰</div>
+<div class="dash-info">
+<div class="dash-label">今日支出</div>
+<div class="dash-value" id="todayExpense">¥0</div>
+<div class="dash-sub" id="todayBudget">预算 ¥200</div>
+</div>
+</div>
+<div class="dash-card todo" data-nav="todo">
+<div class="dash-icon">✅</div>
+<div class="dash-info">
+<div class="dash-label">待办事项</div>
+<div class="dash-value" id="todoCount">0 项</div>
+<div class="dash-sub" id="todoPending">无待办</div>
+</div>
+</div>
+<div class="dash-card english" data-nav="english">
+<div class="dash-icon">📖</div>
+<div class="dash-info">
+<div class="dash-label">多邻国打卡</div>
+<div class="dash-value">40 天 🔥</div>
+<div class="dash-sub">今日: 5分钟听力</div>
+</div>
+</div>
+<div class="dash-card fitness" data-nav="fitness">
+<div class="dash-icon">💪</div>
+<div class="dash-info">
+<div class="dash-label">今日运动</div>
+<div class="dash-value" id="fitnessStatus">未完成</div>
+<div class="dash-sub">168cm / 53kg 增肌中</div>
+</div>
+</div>
+<div class="dash-card ecommerce" data-nav="ecommerce">
+<div class="dash-icon">🛒</div>
+<div class="dash-info">
+<div class="dash-label">跨境电商</div>
+<div class="dash-value">5条动态</div>
+<div class="dash-sub" id="promoAlert">查看促销提醒</div>
+</div>
+</div>
+<div class="dash-card reading" data-nav="reading">
+<div class="dash-icon">📚</div>
+<div class="dash-info">
+<div class="dash-label">阅读</div>
+<div class="dash-value" id="readingProgress">0%</div>
+<div class="dash-sub" id="readingBook">点击选书</div>
+</div>
+</div>
+</div>
+
+<!-- 每日一句 -->
+<div class="daily-quote" id="dailyQuote">
+<div class="quote-label">💬 每日一句</div>
+<div class="quote-text" id="quoteText">加载中...</div>
+<div class="quote-trans" id="quoteTrans"></div>
+</div>
+
+<!-- 快捷操作 -->
+<div class="quick-actions">
+<button class="quick-btn" data-nav="accounting">📝 记一笔</button>
+<button class="quick-btn" data-action="voiceTodo">🎤 语音待办</button>
+<button class="quick-btn" data-nav="english">🗣️ 练口语</button>
+</div>
+</main>
+
+<!-- ====== 记账模块 ====== -->
+<section id="accountingView" class="view">
+<div class="view-header">
+<button class="back-btn" data-nav="home">← 返回</button>
+<h2>💰 记账</h2>
+</div>
+
+<!-- 统计区 -->
+<div class="acc-stats">
+<div class="stat-box">
+<div class="stat-label">本月支出</div>
+<div class="stat-value" id="monthExpense">¥0</div>
+</div>
+<div class="stat-box">
+<div class="stat-label">本周支出</div>
+<div class="stat-value" id="weekExpense">¥0</div>
+</div>
+<div class="stat-box">
+<div class="stat-label">分类王</div>
+<div class="stat-value" id="topCategory">-</div>
+</div>
+</div>
+
+<!-- 分类图表 -->
+<div class="chart-container">
+<h3>📊 分类占比</h3>
+<div class="bar-chart" id="categoryChart"></div>
+</div>
+
+<!-- 记账表单 -->
+<div class="acc-form">
+<h3>📝 记一笔</h3>
+<div class="form-group">
+<label>金额</label>
+<div class="amount-input-wrap">
+<span class="currency">¥</span>
+<input type="number" id="accAmount" placeholder="0.00" step="0.01">
+</div>
+</div>
+<div class="form-group">
+<label>分类</label>
+<div class="category-grid" id="categoryGrid">
+<button class="cat-btn" data-cat="餐饮" data-icon="🍱">🍱 餐饮</button>
+<button class="cat-btn" data-cat="交通" data-icon="🚗">🚗 交通</button>
+<button class="cat-btn" data-cat="购物" data-icon="🛍️">🛍️ 购物</button>
+<button class="cat-btn" data-cat="娱乐" data-icon="🎮">🎮 娱乐</button>
+<button class="cat-btn" data-cat="学习" data-icon="📚">📚 学习</button>
+<button class="cat-btn" data-cat="健身" data-icon="💪">💪 健身</button>
+<button class="cat-btn" data-cat="美妆" data-icon="💄">💄 美妆</button>
+<button class="cat-btn" data-cat="其他" data-icon="📌">📌 其他</button>
+</div>
+</div>
+<div class="form-group">
+<label>备注（可选）</label>
+<input type="text" id="accNote" placeholder="比如：午餐-麦当劳">
+</div>
+<button class="primary-btn" id="saveExpenseBtn">保存记录</button>
+</div>
+
+<!-- 记录列表 -->
+<div class="acc-records">
+<h3>📋 最近记录</h3>
+<div id="expenseList" class="expense-list"></div>
+</div>
+</section>
+
+<!-- ====== 跨境电商模块 ====== -->
+<section id="ecommerceView" class="view">
+<div class="view-header">
+<button class="back-btn" data-nav="home">← 返回</button>
+<h2>🛒 跨境电商</h2>
+</div>
+
+<!-- Tab栏 -->
+<div class="tab-bar" id="ecomTabs">
+<button class="tab-btn active" data-tab="news">📰 资讯</button>
+<button class="tab-btn" data-tab="products">👠 爆款</button>
+<button class="tab-btn" data-tab="promo">🎉 促销</button>
+<button class="tab-btn" data-tab="guide">📖 指南</button>
+</div>
+
+<!-- 资讯 Tab -->
+<div class="tab-content active" id="tab-news">
+<div id="newsList" class="news-list"></div>
+</div>
+
+<!-- 爆款 Tab -->
+<div class="tab-content" id="tab-products">
+<div class="product-filter">
+<button class="filter-btn active" data-platform="all">全部</button>
+<button class="filter-btn" data-platform="amazon">亚马逊</button>
+<button class="filter-btn" data-platform="target">Target</button>
+<button class="filter-btn" data-platform="walmart">Walmart</button>
+<button class="filter-btn" data-platform="kohls">Kohls</button>
+</div>
+<div class="product-filter">
+<button class="filter-btn active" data-category="all">全部</button>
+<button class="filter-btn" data-category="shoes">女鞋</button>
+<button class="filter-btn" data-category="bags">包包</button>
+</div>
+<div id="productList" class="product-list"></div>
+</div>
+
+<!-- 促销 Tab -->
+<div class="tab-content" id="tab-promo">
+<div id="promoList" class="promo-list"></div>
+</div>
+
+<!-- 指南 Tab -->
+<div class="tab-content" id="tab-guide">
+<div class="guide-section">
+<h3>🎯 选品方法论</h3>
+<div class="guide-card">
+<strong>1. 市场容量分析</strong>
+<p>用 Jungle Scout / Helium 10 查品类月搜索量，目标 >1万次/月，但头部商品 review <500，说明有空间。</p>
+</div>
+<div class="guide-card">
+<strong>2. 差异化策略</strong>
+<p>研究 Best Seller Top 10 的差评，找出共性痛点（如尺码偏小、颜色不符），你的产品针对性解决。</p>
+</div>
+<div class="guide-card">
+<strong>3. 利润测算</strong>
+<p>FBA 费用 + 佣金 15% + 头程物流 + 产品成本，售价至少是成本的 3 倍才有利润空间。</p>
+</div>
+<div class="guide-card">
+<strong>4. 季节性判断</strong>
+<p>用 Google Trends 看搜索趋势，避开强季节性品类（除非提前3个月备货），选择全年稳定需求的品类。</p>
+</div>
+</div>
+
+<div class="guide-section">
+<h3>📈 广告优化技巧</h3>
+<div class="guide-card">
+<strong>PPC 自动→手动</strong>
+<p>新品先开自动广告跑2周，收集搜索词报告，把转化好的词移到手动精准，否定掉不相关的词。</p>
+</div>
+<div class="guide-card">
+<strong>ACoS 目标</strong>
+<p>新品期 ACoS 可接受 30-50%（冲排名），稳定后逐步降到 15-25%。TACoS（总广告销售比）控制在 10% 以内。</p>
+</div>
+<div class="guide-card">
+<strong>广告结构</strong>
+<p>每个产品至少3组广告：①自动紧密匹配 ②手动精准（核心词5-10个）③手动广泛（长尾词），预算分配 3:5:2。</p>
+</div>
+</div>
+
+<div class="guide-section">
+<h3>🔬 市场调研方法</h3>
+<div class="guide-card">
+<strong>竞品分析四步法</strong>
+<p>① Keepa 看价格历史和 BSR 排名趋势 ② 分析竞品 review 数量增长速度 ③ 购买竞品体验物流和包装 ④ 用 Helium 10 Cerebro 反查竞品关键词。</p>
+</div>
+<div class="guide-card">
+<strong>市场容量公式</strong>
+<p>Top 10 平均月销量 × 市场需求占比 = 可获取市场。如果 Top 10 月均销 500 件，你做到 Top 20 预估月销 100-200 件。</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ====== 待办模块 ====== -->
+<section id="todoView" class="view">
+<div class="view-header">
+<button class="back-btn" data-nav="home">← 返回</button>
+<h2>✅ 待办事项</h2>
+</div>
+
+<!-- 语音输入 -->
+<div class="voice-section">
+<button class="voice-btn" id="voiceTodoBtn">
+<span class="voice-icon">🎤</span>
+<span class="voice-text">点击语音输入</span>
+</button>
+<div class="voice-status" id="voiceStatus"></div>
+</div>
+
+<!-- 手动输入 -->
+<div class="todo-input-row">
+<input type="text" id="todoInput" placeholder="输入待办事项，回车添加...">
+<button class="add-btn" id="addTodoBtn">+</button>
+</div>
+
+<!-- 筛选 -->
+<div class="todo-filter">
+<button class="filter-btn active" data-filter="all">全部</button>
+<button class="filter-btn" data-filter="pending">待完成</button>
+<button class="filter-btn" data-filter="done">已完成</button>
+</div>
+
+<!-- 待办列表 -->
+<div id="todoList" class="todo-list"></div>
+</section>
+
+<!-- ====== 学英语模块 ====== -->
+<section id="englishView" class="view">
+<div class="view-header">
+<button class="back-btn" data-nav="home">← 返回</button>
+<h2>📖 学英语</h2>
+</div>
+
+<!-- 多邻国打卡 -->
+<div class="duolingo-card">
+<div class="duo-header">
+<span class="duo-icon">🦉</span>
+<div>
+<div class="duo-title">多邻国连续打卡</div>
+<div class="duo-streak">40 天 🔥</div>
+</div>
+</div>
+<div class="duo-goal">下一个里程碑：50天（还差10天）</div>
+<div class="streak-bar">
+<div class="streak-fill" style="width: 80%"></div>
+</div>
+</div>
+
+<!-- 学习区 -->
+<div class="eng-section">
+<h3>🗣️ 今日听说训练</h3>
+<div class="eng-card" id="speakCard">
+<div class="eng-label">跟读练习</div>
+<div class="eng-sentence" id="speakSentence">Click to load sentence...</div>
+<button class="eng-btn" id="playSentenceBtn">▶️ 播放</button>
+<button class="eng-btn record" id="recordSpeakBtn">🎤 跟读</button>
+<div class="eng-feedback" id="speakFeedback"></div>
+</div>
+</div>
+
+<div class="eng-section">
+<h3>👂 听力训练</h3>
+<div class="eng-card">
+<div class="eng-label">精听短句</div>
+<div class="eng-sentence" id="listenSentence">Click to start...</div>
+<button class="eng-btn" id="playListenBtn">▶️ 听一句</button>
+<input type="text" id="listenInput" placeholder="写下你听到的...">
+<button class="eng-btn" id="checkListenBtn">✓ 检查</button>
+<div class="eng-feedback" id="listenFeedback"></div>
+</div>
+</div>
+
+<div class="eng-section">
+<h3>📚 单词本</h3>
+<div class="word-input-row">
+<input type="text" id="wordInput" placeholder="输入新单词...">
+<input type="text" id="wordMeaning" placeholder="中文释义...">
+<button class="add-btn" id="addWordBtn">+</button>
+</div>
+<div id="wordList" class="word-list"></div>
+</div>
+
+<div class="eng-section">
+<h3>💡 学习建议</h3>
+<div class="guide-card">
+<strong>结合多邻国的提升策略</strong>
+<p>多邻国偏重阅读和语法，听说能力需要额外训练。建议：①每天多邻国打卡后，用本模块练10分钟跟读 ②把多邻国遇到的新词加入单词本 ③每周用听力模块做3次精听。</p>
+</div>
+<div class="guide-card">
+<strong>听说优先法</strong>
+<p>影子跟读法（Shadowing）：播放原声→同步跟读→录音对比。每天5句，1个月见效。推荐用 BBC Learning English 和 VOA Special English 作为素材。</p>
+</div>
+</div>
+</section>
+
+<!-- ====== 健身模块 ====== -->
+<section id="fitnessView" class="view">
+<div class="view-header">
+<button class="back-btn" data-nav="home">← 返回</button>
+<h2>💪 健身</h2>
+</div>
+
+<!-- 个人信息 -->
+<div class="fitness-profile">
+<div class="profile-item">
+<span class="profile-label">身高</span>
+<span class="profile-value">168cm</span>
+</div>
+<div class="profile-item">
+<span class="profile-label">体重</span>
+<span class="profile-value">53kg</span>
+</div>
+<div class="profile-item">
+<span class="profile-label">目标</span>
+<span class="profile-value">增肌</span>
+</div>
+<div class="profile-item">
+<span class="profile-label">BMI</span>
+<span class="profile-value">18.8</span>
+</div>
+</div>
+
+<!-- 今日食谱 -->
+<div class="fitness-section">
+<h3>🍽️ 今日食谱推荐</h3>
+<div id="mealPlan" class="meal-plan"></div>
+<button class="primary-btn outline" id="changeMealBtn">🔄 换一套食谱</button>
+</div>
+
+<!-- 运动计划 -->
+<div class="fitness-section">
+<h3>🏋️ 今日运动</h3>
+<div id="workoutPlan" class="workout-plan"></div>
+<button class="primary-btn" id="completeWorkoutBtn">✅ 完成今日运动</button>
+</div>
+
+<!-- 增肌指南 -->
+<div class="fitness-section">
+<h3>📋 增肌指南</h3>
+<div class="guide-card">
+<strong>饮食原则</strong>
+<p>你偏瘦需要热量盈余。每日摄入 = 体重(kg)×35-40大卡 ≈ 1850-2100大卡。蛋白质每天 体重×1.6g ≈ 85g（鸡胸肉约300g）。碳水是力量训练的燃料，不要怕吃主食。</p>
+</div>
+<div class="guide-card">
+<strong>训练原则</strong>
+<p>新手以复合动作为主：深蹲、硬拉、卧推、划船。每周3-4次，每次45-60分钟。先学动作模式，重量从轻开始。女生不用担心练太壮，女性睾酮水平低，增肌需要长期坚持。</p>
+</div>
+<div class="guide-card">
+<strong>休息恢复</strong>
+<p>肌肉在休息时生长。同一肌群间隔48小时再练。保证每天7-8小时睡眠。训练日额外补充碳水。</p>
+</div>
+</div>
+</section>
+
+<!-- ====== 阅读模块 ====== -->
+<section id="readingView" class="view">
+<div class="view-header">
+<button class="back-btn" data-nav="home">← 返回</button>
+<h2>📚 阅读</h2>
+</div>
+
+<div class="reading-filter">
+<button class="filter-btn active" data-cat="all">全部</button>
+<button class="filter-btn" data-cat="growth">个人成长</button>
+<button class="filter-btn" data-cat="business">商业</button>
+<button class="filter-btn" data-cat="english">英语学习</button>
+<button class="filter-btn" data-cat="literature">文学</button>
+</div>
+<div id="bookList" class="book-list"></div>
+</section>
+
+<!-- ====== 阅读器 ====== -->
+<section id="readerView" class="view">
+<div class="view-header">
+<button class="back-btn" data-nav="reading">← 返回</button>
+<h2 id="readerTitle">阅读中</h2>
+</div>
+<div class="reader-content" id="readerContent">
+<p>加载中...</p>
+</div>
+</section>
+
+<!-- 底部导航 -->
+<nav class="bottom-nav">
+<button class="nav-btn active" data-nav="home">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+<span>首页</span>
+</button>
+<button class="nav-btn" data-nav="accounting">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z"></path></svg>
+<span>记账</span>
+</button>
+<button class="nav-btn" data-nav="ecommerce">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+<span>电商</span>
+</button>
+<button class="nav-btn" data-nav="todo">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+<span>待办</span>
+</button>
+<button class="nav-btn" data-nav="english">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<span>英语</span>
+</button>
+<button class="nav-btn" data-nav="fitness">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11"></path><path d="M6.5 17.5h11"></path><path d="M6 20v-3.5a2.5 2.5 0 0 1 5 0V20"></path><path d="M13 20v-3.5a2.5 2.5 0 0 1 5 0V20"></path></svg>
+<span>健身</span>
+</button>
+<button class="nav-btn" data-nav="reading">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+<span>阅读</span>
+</button>
+</nav>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
