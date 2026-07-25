@@ -24,8 +24,10 @@ function navigate(view) {
 document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
 const el = document.getElementById(view + 'View') || document.getElementById(view);
 if (el) el.classList.add('active');
-// 底部导航高亮
+// 底部导航高亮(兼容)
 document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.nav === view));
+// 侧边栏高亮
+document.querySelectorAll('.side-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.nav === view));
 // 滚到顶部
 window.scrollTo(0, 0);
 // 触发各视图刷新
@@ -34,6 +36,8 @@ if (view === 'todo') renderTodos();
 if (view === 'english') loadEnglishSentence();
 if (view === 'fitness') loadFitness();
 if (view === 'reading') renderBooks();
+// 关闭侧边栏(如果在打开状态)
+closeSidebar();
 }
 
 // ===== 日期/时间 =====
@@ -856,6 +860,21 @@ setTimeout(startVoiceInput, 300);
 
 // 底部导航
 document.querySelectorAll('.nav-btn').forEach(btn => {
+btn.addEventListener('click', () => navigate(btn.dataset.nav));
+});
+
+// 侧边栏开关
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+const toggle = document.getElementById('menuToggle');
+function openSidebar(){ if(sidebar){sidebar.classList.add('open'); overlay.classList.add('show');} }
+function closeSidebar(){ if(sidebar){sidebar.classList.remove('open'); overlay.classList.remove('show');} }
+if(toggle) toggle.addEventListener('click', () => {
+if(sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
+});
+if(overlay) overlay.addEventListener('click', closeSidebar);
+// 侧边栏导航项点击(复用 navigate,navigate 内会关闭侧边栏)
+document.querySelectorAll('.side-nav-btn').forEach(btn => {
 btn.addEventListener('click', () => navigate(btn.dataset.nav));
 });
 }

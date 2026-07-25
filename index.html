@@ -15,6 +15,9 @@
 <div id="app">
 <!-- 顶部 -->
 <header class="app-header">
+<button class="menu-toggle" id="menuToggle" aria-label="菜单">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+</button>
 <div class="header-greeting">
 <div class="header-avatar">S</div>
 <div>
@@ -447,8 +450,8 @@
 </div>
 </section>
 
-<!-- 底部导航 -->
-<nav class="bottom-nav">
+<!-- 底部导航(保留备用,默认隐藏) -->
+<nav class="bottom-nav" style="display:none">
 <button class="nav-btn active" data-nav="home">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 <span>首页</span>
@@ -479,6 +482,50 @@
 </button>
 </nav>
 </div>
+
+<!-- 侧边栏遮罩 -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- 侧边栏 -->
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<div class="sidebar-avatar">S</div>
+<div>
+<div class="sidebar-name">Selena</div>
+<div class="sidebar-sub">工作台</div>
+</div>
+</div>
+<nav class="sidebar-nav">
+<button class="side-nav-btn active" data-nav="home">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+<span>首页</span>
+</button>
+<button class="side-nav-btn" data-nav="accounting">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2z"></path></svg>
+<span>记账</span>
+</button>
+<button class="side-nav-btn" data-nav="ecommerce">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+<span>跨境电商</span>
+</button>
+<button class="side-nav-btn" data-nav="todo">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+<span>待办</span>
+</button>
+<button class="side-nav-btn" data-nav="english">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<span>学英语</span>
+</button>
+<button class="side-nav-btn" data-nav="fitness">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11"></path><path d="M6.5 17.5h11"></path><path d="M6 20v-3.5a2.5 2.5 0 0 1 5 0V20"></path><path d="M13 20v-3.5a2.5 2.5 0 0 1 5 0V20"></path></svg>
+<span>健身</span>
+</button>
+<button class="side-nav-btn" data-nav="reading">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+<span>阅读</span>
+</button>
+</nav>
+</aside>
 
 <!-- Toast -->
 <div id="toast" class="toast"></div>
