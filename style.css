@@ -383,6 +383,13 @@ border-left:4px solid #58CC02;
 .duo-goal{font-size:12px;color:var(--text-light);margin-bottom:6px}
 .streak-bar{height:8px;background:var(--bg);border-radius:4px;overflow:hidden}
 .streak-fill{height:100%;background:linear-gradient(90deg,#58CC02,#A7D70A);border-radius:4px;transition:width 0.5s}
+.duo-actions{display:flex;gap:8px;margin-top:10px}
+.duo-btn{flex:1;padding:8px 0;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:transform 0.15s}
+.duo-btn:active{transform:scale(0.95)}
+.duo-btn.plus{background:#58CC02;color:#fff}
+.duo-btn.set{background:var(--bg);color:var(--text)}
+.dash-plus{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:32px;height:32px;border:none;border-radius:50%;background:#58CC02;color:#fff;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.dash-plus:active{transform:translateY(-50%) scale(0.9)}
 
 .eng-section{margin-bottom:20px}
 .eng-section h3{font-size:14px;margin-bottom:10px}

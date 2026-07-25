@@ -452,6 +452,56 @@ const SENTENCES = [
 
 let curSentenceIdx = 0;
 
+// ===== 多邻国打卡天数管理 =====
+function getDuoStreak(){ return Store.get('duoStreak', 40); }
+function saveDuoStreak(n){
+  if(n < 0) n = 0;
+  Store.set('duoStreak', n);
+  updateDuoDisplay();
+}
+function updateDuoDisplay(){
+  const days = getDuoStreak();
+  // 更新首页
+  const homeEl = document.getElementById('homeDuoStreak');
+  if(homeEl) homeEl.textContent = days + ' 天 🔥';
+  // 更新学英语模块
+  const streakEl = document.getElementById('duoStreak');
+  if(streakEl) streakEl.textContent = days + ' 天 🔥';
+  // 里程碑计算:每10天一个里程碑
+  const nextMilestone = Math.ceil((days + 1) / 10) * 10;
+  const diff = nextMilestone - days;
+  const goalEl = document.getElementById('duoGoal');
+  if(goalEl) goalEl.textContent = '下一个里程碑：' + nextMilestone + '天（还差' + diff + '天）';
+  // 进度条:当前里程碑区间内的进度
+  const prevMilestone = nextMilestone - 10;
+  const progress = ((days - prevMilestone) / 10) * 100;
+  const fillEl = document.getElementById('duoStreakFill');
+  if(fillEl) fillEl.style.width = Math.min(100, Math.max(0, progress)) + '%';
+}
+function addDuoDay(){
+  const today = getToday();
+  const lastDate = Store.get('duoLastDate', '');
+  if(lastDate === today){
+    toast('今天已经打过卡啦，明天再来 +1 吧 ✨');
+    return;
+  }
+  Store.set('duoLastDate', today);
+  saveDuoStreak(getDuoStreak() + 1);
+  toast('打卡成功！连续 ' + getDuoStreak() + ' 天 🎉');
+}
+function setDuoDay(){
+  const input = prompt('请输入你当前的多邻国连续打卡天数：', getDuoStreak());
+  if(input === null) return;
+  const n = parseInt(input, 10);
+  if(isNaN(n) || n < 0){
+    toast('请输入有效的数字');
+    return;
+  }
+  saveDuoStreak(n);
+  Store.set('duoLastDate', getToday()); // 设置后视为今天已打卡
+  toast('已更新为 ' + n + ' 天');
+}
+
 function initEnglish() {
 document.getElementById('playSentenceBtn').addEventListener('click', () => {
 speak(document.getElementById('speakSentence').textContent, 'en-US');
@@ -829,6 +879,7 @@ initReading();
 initSpeechRecognition();
 bindEvents();
 registerSW();
+updateDuoDisplay();
 
 // 更新仪表盘数据
 const today = getToday();

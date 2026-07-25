@@ -48,9 +48,10 @@
 <div class="dash-icon">📖</div>
 <div class="dash-info">
 <div class="dash-label">多邻国打卡</div>
-<div class="dash-value">40 天 🔥</div>
-<div class="dash-sub">今日: 5分钟听力</div>
+<div class="dash-value" id="homeDuoStreak">40 天 🔥</div>
+<div class="dash-sub">点击 +1 更新打卡</div>
 </div>
+<button class="dash-plus" id="homeDuoPlus" onclick="event.stopPropagation();addDuoDay()">+1</button>
 </div>
 <div class="dash-card fitness" data-nav="fitness">
 <div class="dash-icon">💪</div>
@@ -299,12 +300,16 @@
 <span class="duo-icon">🦉</span>
 <div>
 <div class="duo-title">多邻国连续打卡</div>
-<div class="duo-streak">40 天 🔥</div>
+<div class="duo-streak" id="duoStreak">40 天 🔥</div>
 </div>
 </div>
-<div class="duo-goal">下一个里程碑：50天（还差10天）</div>
+<div class="duo-goal" id="duoGoal">下一个里程碑：50天（还差10天）</div>
 <div class="streak-bar">
-<div class="streak-fill" style="width: 80%"></div>
+<div class="streak-fill" id="duoStreakFill" style="width: 80%"></div>
+</div>
+<div class="duo-actions">
+<button class="duo-btn plus" onclick="addDuoDay()">+1 天</button>
+<button class="duo-btn set" onclick="setDuoDay()">设置天数</button>
 </div>
 </div>
 
